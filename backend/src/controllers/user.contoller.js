@@ -36,21 +36,16 @@ export const login = async (req, res) => {
       return res.status(400).send("password is not matched");
     }
 
-
-    const token= generateJwtToken(user)
-
+    const token = generateJwtToken(user);
 
     // Create a new object without the password key
     const userWithoutPassword = { ...user.toObject() };
     delete userWithoutPassword.password;
 
-    
-   
-
     res.status(200).send({
-        status:"success",
-        data:{userWithoutPassword,token}
-    })
+      status: "success",
+      data: { userWithoutPassword, token },
+    });
   } catch (err) {
     res.status(500).send({ status: "error", err });
   }
