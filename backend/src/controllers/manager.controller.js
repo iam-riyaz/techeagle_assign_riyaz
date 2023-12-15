@@ -1,16 +1,53 @@
+import * as managerService from "../services/manager.services.js";
 
-import * as managerService from "../services/manager.services.js"
+export const addItem = async (req, res) => {
+  try {
+    const item = await managerService.addItem(req.body);
 
-export const addItem= async(req,res)=>{
+    res.status(201).send({ status: "success", item });
+  } catch (err) {
+    res.status(500).send({ status: "error", message: err.message });
+  }
+};
+
+export const getItems = async (req, res) => {
+  try {
+    
+    const items = await managerService.getItems();
+    res.status(200).send({ status: "success", items });
+  } catch (err) {
+    res.status(500).send({ status: "error", message: err.message });
+  }
+};
+
+export const deleteItem= async(req,res)=>{
     try{
 
-        const item= await managerService.addItem(req.body)
+      const  {_id}= req.body
 
-        res.status(201).send({status:"success", item})
+        const deleteItem= await managerService.deleteItem(_id)
+        res.status(200).send({ status: "success", deleteItem });
 
     }
     catch(err){
-        res.status(500).send({status:"error", message: err.message})
+        res.status(500).send({ status: "error", message: err.message });
+    }
+}
+
+export const updateItem= async (req,res)=>{
+    try{
+      const {_id, quantity}= req.body
+      console.log(req.body)
+
+      const updatedItem= await managerService.updateItem(_id,quantity)
+
+      res.status(200).send({ status: "success",updatedItem})
+
+
+    }
+    catch(err){
+
+        res.status(500).send({ status: "error", message: err.message });
 
     }
 }
