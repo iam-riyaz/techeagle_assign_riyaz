@@ -1,6 +1,9 @@
 
+import { authorisation } from "./middlewares/authorisation.js"
 import { userRoute } from "./routes/user.route.js"
 import {app} from "./utils/server.js"
+import { customerRoute } from "./routes/customer.route.js"
+import { managerRoute } from "./routes/manager.route.js"
 
 app.get("/",async(req,res)=>{
     try{
@@ -15,3 +18,7 @@ app.get("/",async(req,res)=>{
 
 
 app.use("/user", userRoute )
+
+app.use("/customer", authorisation("Customer"), customerRoute)
+
+app.use("/admin", authorisation("Manager"), managerRoute )
