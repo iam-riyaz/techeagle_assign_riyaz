@@ -10,7 +10,7 @@ const inventoryItemSchema = new mongoose.Schema({
   price: { type: Number, required: true },
 });
 
-export const InventoryItem = mongoose.model(
-  "inventoryItem",
+export const Item = mongoose.model(
+  "Item",
   inventoryItemSchema
 );

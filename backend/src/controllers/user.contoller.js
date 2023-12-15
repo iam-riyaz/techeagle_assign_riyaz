@@ -4,7 +4,7 @@ import { generateJwtToken } from "../utils/generateJWTtoken/generateJwtToken.js"
 
 export const signUp = async (req, res) => {
   try {
-    const { name, email, password, address } = req.body;
+    const { name, email, password, address,role } = req.body;
 
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
@@ -14,6 +14,7 @@ export const signUp = async (req, res) => {
       email,
       password: hashedPassword,
       address,
+      role
     });
     res.status(201).send({ status: "success", user });
   } catch (err) {
