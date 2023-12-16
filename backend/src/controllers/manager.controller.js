@@ -36,13 +36,12 @@ export const deleteItem= async(req,res)=>{
 
 export const updateItem= async (req,res)=>{
     try{
-      const {_id, quantity}= req.body
+      const {id, quantity}= req.body
       console.log(req.body)
 
-      const updatedItem= await managerService.updateItem(_id,quantity)
+      const updatedItem= await managerService.updateItem(id,quantity)
 
       res.status(200).send({ status: "success",updatedItem})
-
 
     }
     catch(err){

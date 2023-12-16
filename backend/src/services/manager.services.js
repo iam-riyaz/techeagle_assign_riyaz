@@ -25,8 +25,9 @@ export const deleteItem= async (_id)=>{
     return deleteItem
 }
 
-export const updateItem= async({_id,quantity})=>{
-    const item= await Item.findByIdAndUpdate(_id,{$set:{quantity:quantity}},{new:true})
+export const updateItem= async({id,quantity})=>{
+    const item= await Item.findByIdAndUpdate({_id:id},{$set:{quantity:quantity}},{new:true})
+    item.save()
     
     return item;
 
