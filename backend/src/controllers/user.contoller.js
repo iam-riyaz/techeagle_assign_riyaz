@@ -51,3 +51,16 @@ export const login = async (req, res) => {
     res.status(500).send({ status: "error", err });
   }
 };
+
+
+export const addToCart= (req,res)=>{
+
+  try{
+
+  }
+  catch(err){
+    console.log(err.message);
+  }
+
+
+}
