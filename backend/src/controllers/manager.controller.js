@@ -23,9 +23,9 @@ export const getItems = async (req, res) => {
 export const deleteItem= async(req,res)=>{
     try{
 
-      const  {_id}= req.body
+      const  itemId= req.params.itemId
 
-        const deleteItem= await managerService.deleteItem(_id)
+        const deleteItem= await managerService.deleteItem(itemId)
         res.status(200).send({ status: "success", deleteItem });
 
     }
@@ -36,10 +36,11 @@ export const deleteItem= async(req,res)=>{
 
 export const updateItem= async (req,res)=>{
     try{
-      const {id, quantity}= req.body
-      console.log(req.body)
+      const { quantity}= req.body
+      const itemId=req.params.itemId
+      console.log({itemId,quantity})
 
-      const updatedItem= await managerService.updateItem(id,quantity)
+      const updatedItem= await managerService.updateItem(itemId,quantity)
 
       res.status(200).send({ status: "success",updatedItem})
 

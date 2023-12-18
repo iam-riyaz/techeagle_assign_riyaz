@@ -8,6 +8,6 @@ managerRoute.post("/addItem", managerController.addItem)
 
 managerRoute.get("/getItems", managerController.getItems)
 
-managerRoute.delete("/deleteItem", managerController.deleteItem)
+managerRoute.delete("/deleteItem/:itemId", managerController.deleteItem)
 
-managerRoute.patch("/updateItem", managerController.updateItem)
+managerRoute.patch("/updateItem/:itemId", managerController.updateItem)
