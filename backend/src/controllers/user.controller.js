@@ -57,6 +57,9 @@ export const addToCart= (req,res)=>{
 
   try{
 
+    const {customer,items}= req.body;
+    
+
   }
   catch(err){
     console.log(err.message);

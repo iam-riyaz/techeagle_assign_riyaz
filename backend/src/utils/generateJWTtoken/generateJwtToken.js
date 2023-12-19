@@ -7,7 +7,7 @@ export const generateJwtToken=(user)=>{
     {
         return "SECRET_KEY environment variable is not defined"
     }
-    const {name,email,role}= user
+    const {name,email,role,_id}= user
 
     const accessToken= jwt.sign(
         {name,email,role},
