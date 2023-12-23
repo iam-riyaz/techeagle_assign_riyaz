@@ -11,3 +11,5 @@ managerRoute.get("/getItems", managerController.getItems)
 managerRoute.delete("/deleteItem/:itemId", managerController.deleteItem)
 
 managerRoute.patch("/updateItem/:itemId", managerController.updateItem)
+
+managerRoute.get("/test", managerController.testController)

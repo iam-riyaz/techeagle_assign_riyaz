@@ -1,3 +1,4 @@
+import { Item } from "../models/inventoryItem.model.js";
 import * as managerService from "../services/manager.services.js";
 
 export const addItem = async (req, res) => {
@@ -12,7 +13,6 @@ export const addItem = async (req, res) => {
 
 export const getItems = async (req, res) => {
   try {
-    
     const items = await managerService.getItems();
     res.status(200).send({ status: "success", items });
   } catch (err) {
@@ -20,34 +20,40 @@ export const getItems = async (req, res) => {
   }
 };
 
-export const deleteItem= async(req,res)=>{
-    try{
+export const deleteItem = async (req, res) => {
+  try {
+    const itemId = req.params.itemId;
 
-      const  itemId= req.params.itemId
+    const deleteItem = await managerService.deleteItem(itemId);
+    res.status(200).send({ status: "success", deleteItem });
+  } catch (err) {
+    res.status(500).send({ status: "error", message: err.message });
+  }
+};
 
-        const deleteItem= await managerService.deleteItem(itemId)
-        res.status(200).send({ status: "success", deleteItem });
+export const updateItem = async (req, res) => {
+  try {
+    const { quantity } = req.body;
+    const itemId = req.params.itemId;
+    console.log({ itemId, quantity });
 
-    }
-    catch(err){
-        res.status(500).send({ status: "error", message: err.message });
-    }
-}
+    const updatedItem = await managerService.updateItem(itemId, quantity);
 
-export const updateItem= async (req,res)=>{
-    try{
-      const { quantity}= req.body
-      const itemId=req.params.itemId
-      console.log({itemId,quantity})
+    res.status(200).send({ status: "success", updatedItem });
+  } catch (err) {
+    res.status(500).send({ status: "error", message: err.message });
+  }
+};
 
-      const updatedItem= await managerService.updateItem(itemId,quantity)
+// testing methods
 
-      res.status(200).send({ status: "success",updatedItem})
+export const testController = async (req, res) => {
+  try {
 
-    }
-    catch(err){
+     const items= await Item.find({quantity:{$gt:200}},{productName:1})
+     res.status(200).send({items})
 
-        res.status(500).send({ status: "error", message: err.message });
-
-    }
-}
+  } catch (err) {
+    res.status(500).send({status: "error", message: err.message})
+  }
+};
